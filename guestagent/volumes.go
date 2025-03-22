@@ -4,8 +4,6 @@ import (
 	"errors"
 	"fmt"
 	globalCommon "grove/common"
-	"grove/config"
-	guestCommon "grove/guestagent/common"
 	"strings"
 )
 
@@ -190,12 +188,12 @@ type VolumeMountPoint struct {
 	mountOptions []string
 }
 
-func (vmp *VolumeMountPoint) Mount() error {
-	isExist := guestCommon.ExistsPath(vmp.mountPoint, true, true)
-	if !isExist {
-
-	}
-}
+//func (vmp *VolumeMountPoint) Mount() error {
+//	isExist := guestCommon.ExistsPath(vmp.mountPoint, true, true)
+//	if !isExist {
+//
+//	}
+//}
 
 type VolumeDevice struct {
 	devicePath string

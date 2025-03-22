@@ -1,3 +1,3 @@
 package config
 
-const DefaultTimeout int = 10
+const DefaultTimeout int = 100

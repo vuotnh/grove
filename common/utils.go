@@ -76,6 +76,11 @@ func ExecuteWithTimeout(args []string, kwargs map[string]interface{}) (string, e
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeout)*time.Second)
 	defer cancel()
 
+	rootPermission, ok := kwargs["run_as_root"].(bool)
+	if ok && rootPermission {
+		args = append([]string{"sudo"}, args...)
+	}
+
 	// Chạy command với timeout
 	result, err := Execute(ctx, args)
 	if err != nil {
@@ -128,7 +133,7 @@ func ExecuteShellCmd(cmd string, options []string, args []string, kwargs map[str
 	if !ok {
 		timeout = config.DefaultTimeout
 	}
-	execArgs = append(execArgs, FlagPair{"timout", timeout})
+	execArgs = append(execArgs, FlagPair{"timeout", timeout})
 	cmdFlags := buildCommandOptions(execArgs)
 	cmdArgs := append([]string{cmd}, cmdFlags...)
 	cmdArgs = append([]string{cmd}, args...)
